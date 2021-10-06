@@ -6,4 +6,4 @@ Asignatura de 1º del Máster Universitario en Ingeniería Informática (2021/22
 
   - [Francesc Folch Company](https://github.com/Fran-FC)
   - [Miguel Ángel Gabaldón Lucas]()
-  - [Alejandro]()
+  - [Alejandro Manuel Albert Casañ](https://github.com/alejandalb98)
