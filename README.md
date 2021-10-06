@@ -1,2 +1,9 @@
-# sad
-repositorio para la asignatura de Sistemas y Aplicaciones Distribuidas
+# SAD (Servicios y Aplicaciones Distribuidas)
+
+Asignatura de 1º del Máster Universitario en Ingeniería Informática (2021/22).
+
+## DEVS
+
+  - [Francesc Folch Company](https://github.com/Fran-FC)
+  - [Miguel Ángel Gabaldón Lucas]()
+  - [Alejandro Manuel Albert Casañ](https://github.com/alejandalb98)
