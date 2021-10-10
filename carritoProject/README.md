@@ -14,10 +14,7 @@ Para utilizar el módulo se ha de importar y cada método es async, por lo que h
 
 Para ejecutar el script de prueba simplemente usar node:
 
-
 `$ node pruebaCarrito.js`
-
-
 
 ## Módulo Carrito
 
