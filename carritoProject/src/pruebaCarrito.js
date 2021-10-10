@@ -8,8 +8,8 @@ carro = new Carrito("Fran");
 
 async function run(carro){
     await carro.cogerCarrito();
-    let carroStr = await carro.toString();
-    console.log(carroStr);
+    carro.toString().then(console.log);
+    //console.log(carroStr);
     await carro.add("manzanas", 2);
     await carro.add("manzanas", 3);
     try{
@@ -20,26 +20,6 @@ async function run(carro){
     }
     await carro.add("cereza", 2);
 
-    console.log(await carro.toString());
+    carro.toString().then(console.log);
 }
-run();
-
-
-//create a server object:
-//const requestListener = function (req, res) {
-//    fs.readFile(__dirname + "/index.html")
-//        .then(contents => {
-//            res.writeHead(200, {'Content-Type': 'text/html'});
-//            res.end(contents)
-//        })
-//        .catch(err=>{
-//            res.writeHead(500);
-//            res.end();
-//            return;
-//        });
-//}
-//
-//const server = http.createServer(requestListener);
-//server.listen(8080);
-
-//listen(8080); //the server object listens on port 8080
+run(carro);
