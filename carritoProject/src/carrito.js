@@ -24,7 +24,7 @@ class Carrito {
 	}
 
 	async #closeDB(dbclient){
-		await dbclient.close();
+		dbclient.close();
 	}
 
 	async cogerCarrito() {
@@ -36,7 +36,7 @@ class Carrito {
 		const resp = await col.insertOne(document);
 		this.id = resp["insertedId"];
 
-		await this.#closeDB(dbclient);
+		this.#closeDB(dbclient);
 	}
 
 	// returns a promise with the content of the document queried
@@ -44,7 +44,7 @@ class Carrito {
 		const [col, dbclient] = await this.#connectDB();
 
 		const resp = await col.findOne({_id:this.id});
-		await this.#closeDB(dbclient);
+		this.#closeDB(dbclient);
 
 		return resp;
 	}
@@ -66,7 +66,7 @@ class Carrito {
 
 		await col.updateOne(queryValue, newValues);
 
-		await this.#closeDB(dbclient);
+		this.#closeDB(dbclient);
 	}
 
 	async remove (producto, cantidad=1){
@@ -87,7 +87,7 @@ class Carrito {
 
 		await col.updateOne(queryValue, newValues);
 
-		await this.#closeDB(dbclient);
+		this.#closeDB(dbclient);
 	}
 }
 
