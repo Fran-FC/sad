@@ -6,9 +6,9 @@ class MongoCarro {
 	async #connectDB(){
 		const dbclient = new MongoClient(url);
 		try {
-			await dbclient.connect();
-			const db = dbclient.db(dbname);
-			const col = db.collection("carros");
+			await dbclient.connect(); //Inicia conexion
+			const db = dbclient.db(dbname); //Se conecta a la BD compras
+			const col = db.collection("carros"); //Con la conexion establecida obtiene la coleccion carros
             return [col, dbclient];
 		} catch (err) {
 			console.error(err.stack);
