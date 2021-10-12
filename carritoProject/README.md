@@ -34,7 +34,6 @@ Este módulo ha sido desarrollado para gestionar las operaciones relacionadas co
     para posteriormente cerrar la conexion y retornar el resultado de la query.
 
     * `insertar(doc)`: Establece conexion con la BD. Sobre la colección que obtiene al conectarse(_col_) inserta un documento (una nueva entrada en la BD), cierra la conexion y devuelve la respuesta de ejecutar _collection.insertOne()_, que en concreto es un campo llamado _insertedId_ el cual contiene el valor _\_id_ del documento recien insertado.
-
     Este valor es de gran importancia ya que sera sobre este nuevo documento sobre el cual se ejecutaran los otros 2 metodos publicos (y si queremos acceder a este documento el _\_id_ es imprescindible), ya que las querys que nos pasará desde carrito.js serán así: `{_id:this.id}`.
 
     * `actualizar(query, valores)`: Establece conexion con la BD. Sobre la colección que obtiene al conectarse(_col_), sobre los documentos devueltos por la query se ejecuta una actualización de sus valores, en concreto sobre el campo productos de los documentos devueltos, se actualiza sus valores a los del argumento _myDoc["productos"]_.
