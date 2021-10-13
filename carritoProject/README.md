@@ -50,4 +50,4 @@ Función principal:
 
 ## Prueba del carrito
 
-Para probar el funcionamiento solo habría que ejecutar el script pruebaCarrito.js en node aunque se podría modificar para hacer otro tipo de pruebas.
+Para probar el funcionamiento solo habría que ejecutar el script pruebaCarrito.js en node aunque se podría modificar para insertar o eliminar otros productos.
