@@ -16,10 +16,13 @@ Para ejecutar el script de prueba simplemente usar node:
 
 `$ node pruebaCarrito.js`
 
+Y ofrecerá un programa interactivo mediante consola para poder probar el módulo Carrito.
+
 ## Módulo Carrito
 
 Este módulo contiene la clase Carrito que será la que dará la estructura y incluirá las operaciones pertinentes. Entre esas operaciones tenemos: add para añadir productos, remove para eliminar productos del carrito y toString para mostrar el contenido del mismo. También ofrece una función cogerCarrito para inicializar un carrito vacío. Dentro de estas funciones interacturemos con mongoDB. Todas las operaciones con mongoDB se realizan a través del del módulo MongoCarro (mongoCarro.js) que es utilizado por Carrito.
 
+Los métodos de la clase serán `async` para asegurar el estado de la base de datos consistente.
 
 ## Módulo MongoCarro
 
@@ -45,9 +48,5 @@ Este módulo ha sido desarrollado para gestionar las operaciones relacionadas co
 
 ## Módulo pruebaCarrito
 
-Función principal:
-     `run(carro)`: En esta función se realizan las pruebas de las funciones de la clase carrito. Primero, cogemos el carro y vemos su información con la función toString. A continuación, probamos a añadir manzanas con el método add en dos ocasiones. Más tarde, probamos la función remove para quitar productos del carrito dentro de un bloque try-catch para ver si salta una excepción por quitar un producto que no está en el carrito. Por último, añadimos cerezas al carrito con la función add y mostramos la información del carrito.
+Es un programa que pone un listener de eventos de entrada en stdin utilizando el módulo readline y nos ofrece de manera interactiva por consola las operaciones del módulo Carrito.
 
-## Prueba del carrito
-
-Para probar el funcionamiento solo habría que ejecutar el script pruebaCarrito.js en node aunque se podría modificar para insertar o eliminar otros productos.
