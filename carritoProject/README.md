@@ -42,3 +42,8 @@ Este módulo ha sido desarrollado para gestionar las operaciones relacionadas co
         { $set: { <newField>: <expression>, ... } }
         { $set : {productos:myDoc["productos"]}}
     ```
+
+## Módulo pruebaCarrito
+
+Función principal:
+     `run(carro)`: En esta función se realizan las pruebas de las funciones de la clase carrito. Primero, cogemos el carro y vemos su información con la función toString. A continuación, probamos a añadir manzanas con el método add en dos ocasiones. Más tarde, probamos la función remove para quitar productos del carrito dentro de un bloque try-catch para ver si salta una excepción por quitar un producto que no está en el carrito. Por último, añadimos cerezas al carrito con la función add y mostramos la información del carrito.
