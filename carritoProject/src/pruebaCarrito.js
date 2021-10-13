@@ -35,13 +35,15 @@ const inicio = async function(line){
             console.log(contenidos["productos"]);
         }
     } else {
-        let [prod, cant] = line.split(" ");
-        if (prod != null && cant != null) {
+        let [prod, cant] = line.split(' ');
+        if (prod != '') {
             if (deleteMod) {
                 deleteMod  = false;
+                cant = (cant === '')? cant = 1: cant;
                 carro.remove(prod.toLowerCase(), cant).catch(console.log);
             } else if (addMod) {
                 addMod = false;
+                cant = (cant === '')? cant = 1: cant;
                 carro.add(prod.toLowerCase(), cant);
             }
         }

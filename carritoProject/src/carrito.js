@@ -39,7 +39,9 @@ class Carrito {
 	async remove (producto, cantidad=1){
 		const myDoc = await this.mongo.buscar({_id:this.id});
 		if (producto in myDoc["productos"])  {
-			myDoc["productos"][producto] -= cantidad;
+			cantidad = myDoc["productos"][producto] - cantidad;
+			cantidad = cantidad < 0? 0: cantidad;
+			myDoc["productos"][producto] = cantidad;
 		}
 		else {
 			// throw error?
