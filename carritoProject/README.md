@@ -8,15 +8,16 @@
   - mongodbwiper.js -> Script para borrar todos los documentos de la colección carros tras realizar muchas pruebas, especificar el owner de los documentos.
   - pruebacarrito.js -> Hace uso de la clase Carrito.
 
-## Uso del módulo Carrito
+## Uso del Carrito (pruebaCarrito.js)
 
-Para utilizar el módulo se ha de importar mediante require("./carrito"). En este módulo cada método es async, por lo que habrá que resolver la promesa que devuelve tras cada operación para poder realizar la operación siguiente.
+Para utilizar el módulo se ha de importar mediante require("./carrito"). En este módulo cada método es async, por lo que habrá que resolver la promesa en el caso del método toString() para obtener el resultado de la invocacion asíncrona.
 
 Para ejecutar el script de prueba simplemente usar node:
 
 `$ node pruebaCarrito.js`
 
-Y ofrecerá un programa interactivo mediante consola para poder probar el módulo Carrito.
+prueaCarrito.js es un script que pone un listener de eventos de entrada en stdin utilizando el módulo readline y nos ofrece, de manera interactiva por consola, las operaciones del módulo Carrito.
+
 
 ## Módulo Carrito
 
@@ -45,8 +46,4 @@ Este módulo ha sido desarrollado para gestionar las operaciones relacionadas co
         { $set: { <newField>: <expression>, ... } }
         { $set : {productos:myDoc["productos"]}}
     ```
-
-## Módulo pruebaCarrito
-
-Es un programa que pone un listener de eventos de entrada en stdin utilizando el módulo readline y nos ofrece de manera interactiva por consola las operaciones del módulo Carrito.
 
