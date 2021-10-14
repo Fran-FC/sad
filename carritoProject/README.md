@@ -23,7 +23,7 @@ prueaCarrito.js es un script que pone un listener de eventos de entrada en stdin
 
 Este módulo contiene la clase Carrito que será la que dará la estructura y incluirá las operaciones pertinentes. Entre esas operaciones tenemos: add para añadir productos, remove para eliminar productos del carrito y toString para mostrar el contenido del mismo. También ofrece una función cogerCarrito para inicializar un carrito vacío. Dentro de estas funciones interacturemos con mongoDB. Todas las operaciones con mongoDB se realizan a través del del módulo MongoCarro (mongoCarro.js) que es utilizado por Carrito.
 
-Los métodos de la clase serán `async` para asegurar el estado de la base de datos consistente.
+Los métodos de la clase serán `async` y las llamadas a la base de datos se englobarán en la operación `await` para esperar a resolver cada operación.
 
 ## Módulo MongoCarro
 
