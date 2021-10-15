@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      input{ 
+        border: 1; padding: 10px; width: 10%; 
+        align-self: flex-end;
+      }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+
+    <div>
+      User name<input id="u" placeholder="User name" />
+      <label id="escribiendo" ></label>
+      <button onclick="connect()">UNIRSE</button>
+      <button onclick="disconnect()">ABANDONAR</button>
+      <button onclick="getUserList()">MOSTRAR USUARIOS CONECTADOS</button>
+      <ul id="usuarios"></ul>
+    </div>
+    <div id="chat" style="display: none;">
+      <ul id="messages"></ul>
+      <form action="">
+        <input id="m" autocomplete="off" onkeypress="writting()"/><button>Send</button>
+      </form>
+    </div>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+      // Mensaje de conexion
+      const socket = io();
+
+      function connect(){
+        socket.emit("subscribe", $("#u").val())
+        $("#u").attr("readonly", "readonly");
+        $("#chat").css("display", "block");
+      }
+      function disconnect() {
+        socket.emit("unsubscribe", $("#u").val() )
+        $("#u").removeAttr("readonly");
+        $("#chat").css("display", "none");
+      }
+      function getUserList() {
+        $("#usuarios").empty();
+        socket.emit("get users");
+      }
+      socket.on("user list", (users)=>{
+        users.forEach(u=>{
+          $("#usuarios").append($("<li>").text(u));
+        })
+      });
+
+      $('form').submit(function(){
+        var msg = $("#m").val();
+        var user = $("#u").val();
+
+        $('#messages').append($('<li>').text(user + "-> " + msg));
+
+        socket.emit('chat message',user, msg);
+        
+        $("#m").val("");
+        return false;
+      });
+
+      function writting(value) {
+        console.log("escribiendo");
+        socket.emit('writting', $("#u").val());
+      }
+
+      socket.on('chat message', function(user, msg){
+        if (user != $("#u").val()){
+          $('#messages').append($('<li>').text(user + "-> " + msg));
+        }
+      });
+
+      socket.on('writting', function(user){
+        if (user != $("#u").val()){
+          $('#escribiendo').text(user + " is writting...");
+          setTimeout(()=>{
+            $("#escribiendo").text(" ");
+          }, 1000);
+        }
+      });
+
+      window.addEventListener('beforeunload', function(event) { 
+        disconnect();
+      });
+
+    </script>
+  </body>
+</html>
