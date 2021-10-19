@@ -1,4 +1,5 @@
 const { SocketAddress } = require('net');
+const { type } = require('os');
 
 var app = require('express')();
 var http = require('http').Server(app);
@@ -10,13 +11,26 @@ app.get('/', function(req, res){
 
 var user_list = {};
 
+const getUserList = (socket)=>{
+  let users_connected = [];
+  for (const u in user_list) {
+    if(user_list[u]) {
+      users_connected.push(u);
+    }
+  }
+  return users_connected;
+}
+
 io.on('connection', function(socket){
   console.log('a user connected');
 
   socket.on("subscribe", (user)=>{
     if(!user_list[user]){
       user_list[user] = true;
-      io.emit("chat message", user, "usuario conectado");
+      io.emit("chat message",user, "usuario conectado");
+
+      const users = getUserList();
+      io.emit("user list", users);
     }
   });
 
@@ -24,6 +38,9 @@ io.on('connection', function(socket){
     if(user_list[user]){
       user_list[user] = false;
       io.emit("chat message", user, "usuario desconectado");
+
+      const users = getUserList();
+      io.emit("user list", users);
     }
   });
 
@@ -32,14 +49,9 @@ io.on('connection', function(socket){
   });
 
   socket.on("get users", ()=>{
-    let users_connected = [];
-    for (const u in user_list) {
-      if(user_list[u]) {
-        users_connected.push(u);
-      }
-    }
-    socket.emit("user list", users_connected);
-  })
+    const users = getUserList();
+    io.emit("user list", users);
+  });
 
   socket.on('chat message', function(user, msg){
     console.log('message: ' + msg);

@@ -25,7 +25,7 @@
       <label id="escribiendo" ></label>
       <button onclick="connect()">UNIRSE</button>
       <button onclick="disconnect()">ABANDONAR</button>
-      <button onclick="getUserList()">MOSTRAR USUARIOS CONECTADOS</button>
+      <!-- <button onclick="getUserList()">MOSTRAR USUARIOS CONECTADOS</button> -->
       <ul id="usuarios"></ul>
     </div>
     <div id="chat" style="display: none;">
@@ -39,23 +39,29 @@
     <script>
 
       // Mensaje de conexion
-      const socket = io();
+      const socket = io("http://localhost:8080", {autoConnect:false});
+      //export default socket;
 
       function connect(){
-        socket.emit("subscribe", $("#u").val())
+        socket.connect();
+        socket.emit("subscribe", $("#u").val());
         $("#u").attr("readonly", "readonly");
         $("#chat").css("display", "block");
       }
+
       function disconnect() {
-        socket.emit("unsubscribe", $("#u").val() )
+        socket.emit("unsubscribe", $("#u").val());
         $("#u").removeAttr("readonly");
         $("#chat").css("display", "none");
+        socket.disconnect();
       }
+      
       function getUserList() {
-        $("#usuarios").empty();
         socket.emit("get users");
       }
+
       socket.on("user list", (users)=>{
+        $("#usuarios").empty();
         users.forEach(u=>{
           $("#usuarios").append($("<li>").text(u));
         })
