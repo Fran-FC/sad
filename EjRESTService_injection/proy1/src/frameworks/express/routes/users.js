@@ -6,9 +6,10 @@ const{
 
 module.exports = dependencies =>{
     const router = express.Router();
-    const{ addUserController} = userControllers(dependencies);
+    const{ addUserController, listUsersController} = userControllers(dependencies);
 
     router.route( '/').post(addUserController);
+    router.route('/').get(listUsersController);
+
     return router;
-    
 } 

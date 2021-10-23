@@ -8,8 +8,7 @@ module.exports = dependencies =>{
     } 
     
     const execute = ()=>{
-        //return userRepository.(newUser);
-        return 
+        return userRepository.list();
 
     } 
     return{ execute } ;

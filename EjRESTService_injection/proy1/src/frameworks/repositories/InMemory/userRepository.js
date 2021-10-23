@@ -13,6 +13,7 @@ module.exports= {
 
         } 
         inMemoryDb.users.push(user);
+        console.log(inMemoryDb);
         return user;
 
     } ,

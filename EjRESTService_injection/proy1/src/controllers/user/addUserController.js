@@ -31,7 +31,10 @@ module.exports = dependencies =>{
                 name,
                 lastName, 
                 gender,
-                meta} );
+                meta
+            });
+            console.log(response);
+            
             
             res.json(new Response({
                 status:true,
