@@ -17,12 +17,14 @@
     <div id="menu" class="container-fluid p-2 bg-dark text-white fixed-top mb-5">
       <div class="row">
         <div class="col-sm-8 ">
+          <!-- introducir el nombre de usuario  -->
           <form id="userForm" action="" class="d-inline-block">
             <input id="u" placeholder="User name"/>
-            <input type="submit" value="UNIRSE" class="btn btn-primary"/>
+            <input id="unirse" type="submit" value="UNIRSE" class="btn btn-primary"/>
           </form>
-          <button class="btn btn-warning" onclick="disconnect()">ABANDONAR</button>
+          <button id="salir" class="btn btn-warning" onclick="disconnect()" style="display: none;">ABANDONAR</button>
           
+          <!-- boton para mostrar usuarios conectados -->
           <div class="dropdown d-inline-block">
             <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">
               Conectados
@@ -31,36 +33,44 @@
             </ul>
           </div> 
         </div>
+        
+        <!-- texto que muestra si un usuario está escribiendo -->
         <div class="col-sm-4">
           <label id="escribiendo" ></label>
         </div>
       </div>
     </div>
 
-    <div id="chat" class="container-fluid my-5 py-2" style="display: none;">
+    <!-- Cuerpo del chat -->
+    <div id="chat" class="container-fluid my-5 py-5" style="display: none;">
       <ul id="messages"></ul>
     </div>
 
+    <!-- Bloque para el envío de mensajes -->
     <div class="container-fluid fixed-bottom bg-dark text-white p-2"> 
-      
-      <form id="msgForm" action="" class="container-fluid">
+      <form id="msgForm" action="" class="d-inline-block container-fluid">
         <input id="m" autocomplete="off" onkeypress="writting()"/>
         <input type="submit" value=">" class="btn btn-primary">
-        
-        <div class="dropup d-inline-block">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-            ENVIAR A 
-          </button>
-          <ul id="enviarA" class="dropdown-menu">
-            <div id="enviarA_todos" class="form-check">
-              <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
-              <label class="form-check-label" for="radio1">Todos</label>
-            </div>
-          </ul>
-        </div>
 
+        <div class="d-inline-block">
+          <input type="text" id="dst" placeholder="usuario destino">
+        </div>
       </form>
+
+      <!-- Boton para seleccionar destinatario del mensaje (por defecto es Todos) -->
+      <!-- <div class="dropup d-inline-block">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+          ENVIAR A 
+        </button>
+        <ul id="enviarA" class="dropdown-menu">
+          <div id="enviarA_todos" class="form-check">
+            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+            <label class="form-check-label destinations" for="radio1">Todos</label>
+          </div>
+        </ul>
+      </div> -->
     </div>
+
     <script>
       // Mensaje de conexion
       //export default socket;
@@ -78,62 +88,53 @@
           <div class='alert alert-info alert-dismissible fade show'>\
             <button type='button' class='btn-close' data-bs-dismiss='alert'></button>\
             <strong>Error</strong> Username empty!.\
-          </div></div>")
-          
+          </div></div>");
         }else {
           socket.emit("subscribe", $("#u").val());
+
+          $("#unirse").css("display", "none");
+          $("#salir").css("display", "inline-block");
+
           $("#u").attr("readonly", "readonly");
-          $("#chat").css("display", "block");
+          $("#chat").css("display", "inline-block");
         }
       }
 
       function disconnect() {
         socket.emit("unsubscribe", $("#u").val());
+
+        $("#salir").css("display", "none");
+        $("#unirse").css("display", "inline-block");
+              
+        
         $("#u").removeAttr("readonly");
         $("#chat").css("display", "none");
         $("#users").empty();
-        $("#enviarA").empty();
-        $("#enviarA").append("<div id=\"enviarA_todos\" class=\"form-check\">\
-              <input type=\"radio\" class=\"form-check-input\" id=\"radio1\" name=\"optradio\" value=\"option1\" checked>\
-                <label class=\"form-check-label\" for=\"radio1\">Todos</label>\
-              </div>");
-      }
-
-      function getUserList() {
-        socket.emit("get users");
       }
 
       socket.on("user list", (users)=>{
         $("#users").empty();
-        $("#enviarA").empty();
-        $("#enviarA").append("<div id=\"enviarA_todos\" class=\"form-check\">\
-              <input type=\"radio\" class=\"form-check-input\" id=\"radio1\" name=\"optradio\" value=\"option1\" checked>\
-                <label class=\"form-check-label\" for=\"radio1\">Todos</label>\
-              </div>");
         users.forEach(u=>{
           var userelement = "<li id='connected_"+u+"'><span class=\"dropdown-item-text\">"+u+"</span></li>";
           $("#users").append(userelement);
-          $("#enviarA").append(
-            "<div id='enviarA_"+u+"' class='form-check'>\
-              <input type='radio' class='form-check-input' id='radio1' name='optradio' value='option1' checked>\
-              <label class='form-check-label' for='radio1'>"+u+"</label>\
-            </div>"
-          );
+
+          if ($("#u").val() != u){
+            console.log(u);
+            console.log($("#u"))
+          }
         });
       });
 
-      $("#msgForm").submit( function(e) {"<div id='enviarA_"+u+"' class='form-check'>\
-                <input type='radio' class='form-check-input' id='radio1' name='optradio' value='option1' checked>\
-                <label class='form-check-label' for='radio1'>"+u+"</label>\
-              </div>"
+      $("#msgForm").submit( function(e) {        
         e.preventDefault();
         var msg = $("#m").val();
-        var user = $("#u").val();
+        var src = $("#u").val();
+        var dst = $("input#dst").val();
 
-        $('#messages').append($('<li>').text(user + ": " + msg));
+        $('#messages').append($('<li>').text(src + ": " + msg));
         window.scrollTo(0,document.body.scrollHeight);
 
-        socket.emit('chat message',user, msg);
+        socket.emit('chat message',src, dst, msg);
         
         $("#m").val("");
         
