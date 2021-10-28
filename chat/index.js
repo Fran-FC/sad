@@ -1,9 +1,12 @@
 const { SocketAddress } = require('net');
 const { type } = require('os');
 
-var app = require('express')();
+const express= require('express');
+const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+app.use(express.static(__dirname+"/public"));
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
@@ -27,7 +30,7 @@ io.on('connection', function(socket){
   socket.on("subscribe", (user)=>{
     if(!user_list[user]){
       user_list[user] = true;
-      io.emit("chat message",user, "usuario conectado");
+      io.emit("user connected",user);
 
       const users = getUserList();
       io.emit("user list", users);
@@ -37,7 +40,7 @@ io.on('connection', function(socket){
   socket.on("unsubscribe", (user)=>{
     if(user_list[user]){
       user_list[user] = false;
-      io.emit("chat message", user, "usuario desconectado");
+      io.emit("user disconnected",user);
 
       const users = getUserList();
       io.emit("user list", users);
