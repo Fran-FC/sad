@@ -77,7 +77,7 @@ io.on('connection', function(socket){
   });
 
   socket.on("writting", function(user) {
-    console.log(user + " writting");
+    //console.log(user + " writting");
     io.emit("writting", user);
   });
 
