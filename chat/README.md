@@ -28,6 +28,7 @@ Por otro lado, en el script se inicializan los listeners de los eventos que proc
 2. Usuario escribiendo.
 3. Usuario conectado.
 4. Usuario desconectado.
+
 Cuando uno de estos eventos sucede se modifica la página para que el usuario lo visualize.
 
 # Puesta en marcha
