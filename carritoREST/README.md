@@ -2,4 +2,4 @@
 
 ## Arquitectura distribuida
 
-<img src="imgs/diagramaCarroREST1.jpg">
+<img src="imgs/diagramaCarroREST1.png">
