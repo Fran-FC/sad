@@ -2,3 +2,4 @@
 /carritoProject/src/mongodbtest.js
 /carritoProject/package-lock.json
 *.pdf
+carritoREST/service-registry/server/services.json
