@@ -9,7 +9,7 @@ module.exports = dependencies => {
     
     const execute = ({ owner}) => {
         var carrito = carritoRepository.get(owner);
-        return JSON.stringify(carrito);
+        return carrito;
     }
     
     return {execute};

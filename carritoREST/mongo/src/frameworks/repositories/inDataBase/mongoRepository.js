@@ -46,43 +46,55 @@ const update  = async function actualizar(query, valores) {
 
 module.exports= {
     get: async owner =>{
-        var carrito;
-        carrito = inMemory.carritos.find(item => item === owner);
+        var carrito = await search({owner:owner});
         if (!carrito) {
-            carrito = await insert({owner: owner, products:{}});
+            await insert({owner: owner, products:{}});
             inMemory.carritos.push(owner);
-        } else {
-            carrito = await search({owner:owner});
-        }
-        return carrito;
+            carrito = {owner: owner,products:{}};
+        }         
+        //console.log(carrito);
+        return {
+            carrito:{
+                owner:owner,
+                products:carrito.products
+            }
+        };
     },
 
     add: async carrito =>{ 
-        const myDoc = await search({owner:carrito["owner"]});
-		if (p in myDoc["products"])  {
-			myDoc["products"][p] += carrito["quantity"];
+        const {owner, product, quantity} = carrito;
+        //console.log({owner, product, quantity});
+
+        const myDoc = await search({owner:owner});
+		if (product in myDoc["products"])  {
+			myDoc["products"][product] += parseInt(quantity);
 		}
 		else {
-			myDoc["products"][p] = carrito["quantity"];
+			myDoc["products"][product] = quantity;
 		}
 
 		const newValues = { $set : {products:myDoc["products"]}};
 
-        await update({owner:owner} , newValues);
+        const resp  = await update({owner:owner} , newValues);
+        //console.log(resp);
         return null;
     } ,
 
     delete: async carrito =>{
-        const myDoc = await search({owner:carrito["owner"]});
-		if (p in myDoc["products"])  {
-			var newQuantity = myDoc["products"][p] - carrito["quantity"];
+        const {product, owner, quantity} = carrito;
+        const myDoc = await search({owner:owner});
+
+		if (product in myDoc["products"])  {
+			var newQuantity = myDoc["products"][product] - quantity;
             if(newQuantity === 0) {
-                delete myDoc["product"][p];
+                delete myDoc["products"][product];
+            } else {
+                myDoc["products"][product] = newQuantity;
             }
 		}
 		else {
             throw new Error("Product not in carrito ");
-		}
+        }
 
 		const newValues = { $set : {products:myDoc["products"]}};
         

@@ -21,7 +21,7 @@ const updateToServiceRegistry = ()=>{
     axios.
         put(ServiceRegistryURL + "/register" + API_PREFIX + "/" + PORT). // register into ServiceRegistry with api name, version and port
         then(response=>{
-            console.log("updated service in ServiceRegistry-> " + response);
+            //console.log("updated service in ServiceRegistry-> " + response);
         })
         .catch(error=>{
             console.error("ERROR updating in ServiceRegistry-> " + error);
@@ -30,7 +30,7 @@ const updateToServiceRegistry = ()=>{
         axios.
             put(ServiceRegistryURL + "/register" + API_PREFIX + "/" + PORT). // register into ServiceRegistry with api name, version and port
             then(response=>{
-                console.log("updated service in ServiceRegistry-> " + response);
+                //console.log("updated service in ServiceRegistry-> " + response);
             })
             .catch(error=>{
                 console.error("ERROR updating in ServiceRegistry-> " + error);

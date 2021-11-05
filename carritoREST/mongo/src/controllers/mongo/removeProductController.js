@@ -12,11 +12,7 @@ module.exports = dependencies =>{
     }  = dependencies;
     const removeProduct = async (req,res,next) =>{
         try{
-            const body =  JSON.parse(req.body);
-
-            console.log(JSON.parse(req.body));
-            console.log(req.body.name);
-
+            const body =  req.body;
 
             const{
                 owner, 
@@ -24,13 +20,13 @@ module.exports = dependencies =>{
                 quantity
             } = body;
 
-            const removeProduct = removeProcutUseCase(dependencies);
+            const removeProduct = removeProductUseCase(dependencies);
             const response = await removeProduct.execute({
                 owner,
                 product,
                 quantity
             });
-            console.log(response);
+            //console.log(response);
             
             
             res.json(new Response({

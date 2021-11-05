@@ -12,32 +12,35 @@ let MongoService = {
 }
 let MongoURL = "";
 // periodically find service 
-setInterval(() => {
+
+var findMongoService = ()=>{
     axios
         .get(SericeRegistryURL+"/find/"+MongoService.name+"/"+MongoService.version)
         .then(response=>{
-            console.log(response.data);
             MongoService.name = response.data.name;
             MongoService.version = response.data.version;
             MongoService.ip = response.data.ip;
             MongoService.port = response.data.port;
             
-            MongoURL = "http://"+MongoService.ip+"/"+MongoService.port+"/"+MongoService.name+"/"+MongoService.version;
+            MongoURL = "http://"+MongoService.ip+":"+MongoService.port+"/"+MongoService.name+"/"+MongoService.version+"/";
         })
         .catch(error=>{
             throw new Error("Error at requesting service to ServiceRegistry " + error)
         });
-}, 10000);
+}
+findMongoService();
+setInterval(findMongoService, 10000);
 
 
 module.exports= {
     get: async owner => {
+        //console.log(MongoURL);
+
         var carrito ;
-        console.log(MongoURL+"mongo/toString/"+owner);
-        axios
+        await axios
             .get(MongoURL+"mongo/toString/"+owner)
             .then(response=>{
-               carrito = response.carrito; 
+                carrito = response.data.content.carrito; 
             })
             .catch(error => {
                 throw new Error("Fallo al pedir carro a MongoClientDB " + error)
@@ -50,7 +53,7 @@ module.exports= {
         carrito = {
             owner : owner,
             product : product,
-            quantity : quantity
+            quantity : parseInt(quantity)
         }
         axios
             //.put(MongoURL +"carritos/addProduct"+owner+"/"+product+"/"+quantity)
@@ -69,7 +72,7 @@ module.exports= {
         carrito = {
             owner : owner,
             product : product,
-            quantity : quantity
+            quantity : parseInt(quantity)
         }
         axios
             .put(MongoURL +"mongo/removeProduct", carrito)

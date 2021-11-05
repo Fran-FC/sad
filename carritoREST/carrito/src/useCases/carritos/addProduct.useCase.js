@@ -8,6 +8,7 @@ module.exports = dependencies => {
     }
     
     const execute = ({owner, product, quantity}) => {
+        //console.log("AÑADIENDO PRODUCTO" + product + " " + quantity);
         var carrito = carritoRepository.add(owner, product, quantity);
         return carrito;
     }

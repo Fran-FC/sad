@@ -12,11 +12,11 @@ module.exports = dependencies =>{
     }  = dependencies;
     const addProduct = async (req,res,next) =>{
         try{
-            const body =  JSON.parse(req.body);
+            const body = req.body;
+            //const body =  JSON.parse(req.body);
 
-            console.log(JSON.parse(req.body));
-            console.log(req.body.name);
-
+            // console.log(req.body);
+            // console.log(req.body.name);
 
             const{
                 owner, 
@@ -30,7 +30,7 @@ module.exports = dependencies =>{
                 product,
                 quantity
             });
-            console.log(response);
+            //console.log(response);
             
             
             res.json(new Response({
@@ -42,6 +42,7 @@ module.exports = dependencies =>{
 
 
         } catch (err){
+            console.error(err);
             next(err);
         } 
 

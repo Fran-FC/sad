@@ -13,8 +13,8 @@ module.exports = dependencies =>{
         try{
             const body =  JSON.parse(req.body);
 
-            console.log(JSON.parse(req.body));
-            console.log(req.body.name);
+//            console.log(JSON.parse(req.body));
+            //console.log(req.body.name);
 
 
             const{
@@ -29,7 +29,7 @@ module.exports = dependencies =>{
                 product,
                 quantity
             });
-            console.log(response);
+            //console.log(response);
             
             
             res.json(new Response({
