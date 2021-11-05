@@ -26,5 +26,24 @@ Para poder hacer uso del servicio, primero pediremos la url al service registry 
 - `post("http://localhost:3001/CarritoAPI/v0/carritos/addProduct", {owner, product, quantity})`: Para añadir una cantidad de un producto en concreto. Los parámetros se especifican en cuerpo de la petición.
 - `post("http://localhost:3001/CarritoAPI/v0/carritos/removeProduct", {owner, product, quantity})`: Para eliminar una cantidad de un producto en concreto, si no existe el producto no se hace nada.
 
+Podemos utilizar la herramienta `curl` para hacer peticiones a las API:
+- `curl -X GET -i http://localhost:3000/find/CarritoAPI/v0` nos devuelve
+-
+```JavaScript
+{"timestamp":1636150026,"ip":"[::ffff:127.0.0.1]","port":"3001","name":"CarritoAPI","version":"v0"}
+```
+
+- Con la url formada queremos ver nuestro carro `curl -X GET -i 'http://[::ffff:127.0.0.1]:3001/CarritoAPI/v0/carritos/toString/Fran'`. Como el carrito está vacío se muestra lo siguiente:
+-
+```JavaScript
+{"status":true,"error":null,"content":{"owner":"Fran","products":{}}}
+```
+
+-Probamos a añadir 5 manzanas: `curl -X POST -i 'http://[::ffff:127.0.0.1]:3001/CarritoAPI/v0/carritos/addProduct' --data '{"owner":"Fran","product":"manzanas","quantity":5}'`, y si volvemos a hacer el toString, veremos que se muestran las manzanas en el carrito:
+
+```JavaScript
+{"status":true,"error":null,"content":{"owner":"Fran","products":{"manzanas":5}}}
+```
+
 ## MongoClientAPI
 La persistencia se consigue a través de MongoDB, los accesos a la base de datos se realizan a través de este servicio. Ofrece las entradas que CarritoAPI (get(toString), post(addProduct) y post(removeProduct)), pero en `repositories` se accederá a la base de datos con el módulo `mongodb`.
