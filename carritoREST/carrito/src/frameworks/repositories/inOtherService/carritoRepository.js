@@ -7,18 +7,22 @@ let MongoService = {
     name : "MongoClientAPI",
     version : "v0",
     ip : "",
-    port : "",
-    url : "http://"+this.ip+"/"+this.port+"/"+this.name+"/"+this.version+"/"
+    port : ""
+   // url : "http://"+this.ip+"/"+this.port+"/"+this.name+"/"+this.version+"/"
 }
+let MongoURL = "";
 // periodically find service 
 setInterval(() => {
     axios
         .get(SericeRegistryURL+"/find/"+MongoService.name+"/"+MongoService.version)
         .then(response=>{
-            MongoService.name = response.name;
-            MongoService.version = response.version;
-            MongoService.ip = response.ip;
-            MongoService.port = response.port;
+            console.log(response.data);
+            MongoService.name = response.data.name;
+            MongoService.version = response.data.version;
+            MongoService.ip = response.data.ip;
+            MongoService.port = response.data.port;
+            
+            MongoURL = "http://"+MongoService.ip+"/"+MongoService.port+"/"+MongoService.name+"/"+MongoService.version;
         })
         .catch(error=>{
             throw new Error("Error at requesting service to ServiceRegistry " + error)
@@ -29,8 +33,9 @@ setInterval(() => {
 module.exports= {
     get: async owner => {
         var carrito ;
+        console.log(MongoURL+"mongo/toString/"+owner);
         axios
-            .get(MongoService.url+"mongo/toString/"+owner)
+            .get(MongoURL+"mongo/toString/"+owner)
             .then(response=>{
                carrito = response.carrito; 
             })
@@ -39,6 +44,7 @@ module.exports= {
             });
         return carrito;
     },
+
     add: async (owner, product, quantity)=> {
         var carrito ;
         carrito = {
@@ -47,8 +53,8 @@ module.exports= {
             quantity : quantity
         }
         axios
-            //.put(MongoService.url +"carritos/addProduct"+owner+"/"+product+"/"+quantity)
-            .put(MongoService.url+"mongo/addProduct", carrito)
+            //.put(MongoURL +"carritos/addProduct"+owner+"/"+product+"/"+quantity)
+            .put(MongoURL+"mongo/addProduct", carrito)
             .then(response => {
                 carrito = response.carrito;
             })
@@ -57,6 +63,7 @@ module.exports= {
             });
         return carrito;
     },
+
     remove: async (owner, product, quantity) => {
         var carrito ;
         carrito = {
@@ -65,7 +72,7 @@ module.exports= {
             quantity : quantity
         }
         axios
-            .put(MongoService.url +"mongo/removeProduct", carrito)
+            .put(MongoURL +"mongo/removeProduct", carrito)
             .then(response => {
                 carrito = response.carrito;
             })
@@ -73,7 +80,6 @@ module.exports= {
                 throw new Error("Error removing products... " + error)
             });
         return carrito;
-
     }
 } 
 

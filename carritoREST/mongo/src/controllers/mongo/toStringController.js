@@ -12,8 +12,10 @@ module.exports = dependencies =>{
     }  = dependencies;
     const toString = async (req,res,next) =>{
         try{
+            const {owner} = req.params;
+
             const toString = toStringUseCase(dependencies);
-            const response = await toString.execute();
+            const response = await toString.execute({owner});
             
             res.json(new Response({
                 status:true,

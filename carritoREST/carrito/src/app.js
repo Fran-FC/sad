@@ -13,8 +13,31 @@ const dependencies = require('./config/dependencies');
 const ErrorHandler = require('./frameworks/express/ErrorHandler');
 
 const ServiceRegistryURL = "http://localhost:3000"
+
+const updateToServiceRegistry = ()=>{
+    // update 
+    axios.
+        put(ServiceRegistryURL + "/register" + API_PREFIX + "/" + PORT). // register into ServiceRegistry with api name, version and port
+        then(response=>{
+            console.log("updated service in ServiceRegistry-> " + response);
+        })
+        .catch(error=>{
+            console.error("ERROR updating in ServiceRegistry-> " + error);
+        });
+    setInterval(()=>{
+        axios.
+            put(ServiceRegistryURL + "/register" + API_PREFIX + "/" + PORT). // register into ServiceRegistry with api name, version and port
+            then(response=>{
+                console.log("updated service in ServiceRegistry-> " + response);
+            })
+            .catch(error=>{
+                console.error("ERROR updating in ServiceRegistry-> " + error);
+            });
+    }, 20000);
+}
 module.exports ={
     start: () =>{
+        updateToServiceRegistry();
         //Middlewares
         app.use(express.json());
         app.use(express.urlencoded({ extended:true } ));
@@ -31,16 +54,5 @@ module.exports ={
         } )
 
 
-        // update 
-        setInterval(()=>{
-            axios.
-                put(ServiceRegistryURL + "/register" + API_PREFIX + "/" + PORT). // register into ServiceRegistry with api name, version and port
-                then(response=>{
-                    console.log("updated service in ServiceRegistry-> " + response);
-                })
-                .catch(error=>{
-                    console.error("ERROR updating in ServiceRegistry-> " + error);
-                });
-        }, 20000);
     }   
 } 

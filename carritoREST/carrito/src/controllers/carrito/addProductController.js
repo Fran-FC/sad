@@ -4,7 +4,7 @@ const{
 module.exports = dependencies =>{
     const{
         useCases:{
-            carrito:{  
+            carritos:{  
                 addProductUseCase
             } 
         } 

@@ -10,7 +10,7 @@ module.exports = dependencies =>{
 
     router.route( '/addProduct').post(addProductController);
     router.route('/removeProduct').post(removeProductController);
-    router.route('/toString').get(toStringController);
+    router.route('/toString/:owner').get(toStringController);
 
     return router;
 } 

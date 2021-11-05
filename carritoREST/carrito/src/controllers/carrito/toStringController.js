@@ -5,15 +5,17 @@ const{
 module.exports = dependencies =>{
     const{
         useCases:{
-            carrito:{  
+            carritos:{  
                 toStringUseCase
             } 
         } 
     }  = dependencies;
     const toString = async (req,res,next) =>{
         try{
+            const {owner} = req.params;
+
             const toStringCarrito = toStringUseCase(dependencies);
-            const response = await toStringCarrito.execute();
+            const response = await toStringCarrito.execute({owner});
             
             res.json(new Response({
                 status:true,
