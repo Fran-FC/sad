@@ -1,5 +1,14 @@
 # EJERCICIO 3. CARRITO REST
 
+## DEVS
+  - [Francesc Folch Company](https://github.com/Fran-FC)
+  - [Miguel Ángel Gabaldón Ibañez](https://github.com/migaib)
+  - [Alejandro Manuel Albert Casañ](https://github.com/alejandalb98)
+  
+## Código
+
+El código se encuentra en el siguiente [repositorio](https://github.com/Fran-FC/sad), en el directorio llamado [carritoREST](https://github.com/Fran-FC/sad/tree/main/carritoREST).
+  
 ## Arquitectura distribuida
 
 Este ejercicio se ha realizado y desplegado en una única máquina, por lo que cada componente tendrá un puerto distinto desde el que estarán escuchando, ya que solo hay una única dirección IP disponible (127.0.0.1).
