@@ -1,4 +1,4 @@
-const userControllers = require('./user');
+const mongoControllers = require('./mongo');
 module.exports ={
-    userControllers
+    mongoControllers
 } 

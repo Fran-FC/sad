@@ -1,5 +1,5 @@
-const inMemory = require('./inMemory');
+const inDataBase = require('./inDataBase');
 
 module.exports ={
-    inMemory
+    inDataBase
 } 

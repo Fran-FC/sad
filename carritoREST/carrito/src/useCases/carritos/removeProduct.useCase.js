@@ -8,11 +8,8 @@ module.exports = dependencies => {
     }
     
     const execute = ({owner, product, quantity}) => {
-        var carrito = carritoRepository.get(owner);
-        if (!carrito) {
-            throw new Error("empty carrito, can't remove product");
-        }
-        return carrito.removeProduct( product, quantity);
+        var carrito = carritoRepository.remove(owner, product, quantity);
+        return carrito;
     }
     
     return {execute};

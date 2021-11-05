@@ -1,9 +1,9 @@
 const express = require('express');
-const userRoutes = require('./users')
+const mongoRoutes = require('./mongo')
 
 module.exports = dependencies =>{
     const routes = express.Router();
-    const users = userRoutes(dependencies);
-    routes.use('/users',users)
+    const mongos = mongoRoutes(dependencies);
+    routes.use('/mongo',mongos)
     return routes;
 }

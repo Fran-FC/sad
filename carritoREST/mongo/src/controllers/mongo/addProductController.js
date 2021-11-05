@@ -1,15 +1,16 @@
 const{
     Response
 }  = require('../../frameworks/common');
+const { addProcutUseCase } = require('../../useCases/mongo');
 module.exports = dependencies =>{
     const{
         useCases:{
-            carrito:{  
-                removeProductUseCase
+            mongo:{  
+                addProductUseCase
             } 
         } 
     }  = dependencies;
-    const removeProduct = async (req,res,next) =>{
+    const addProduct = async (req,res,next) =>{
         try{
             const body =  JSON.parse(req.body);
 
@@ -18,13 +19,13 @@ module.exports = dependencies =>{
 
 
             const{
-                owner,
+                owner, 
                 product,
                 quantity
             } = body;
 
-            const removeProduct = removeProductUseCase(dependencies);
-            const response = await removeProduct.execute({
+            const addProduct = addProcutUseCase(dependencies);
+            const response = await addProduct.execute({
                 owner,
                 product,
                 quantity
@@ -45,6 +46,6 @@ module.exports = dependencies =>{
         } 
 
     } 
-    return removeProduct;
+    return addProduct;
 
 } 

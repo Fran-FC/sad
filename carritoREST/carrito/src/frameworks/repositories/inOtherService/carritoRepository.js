@@ -10,7 +10,6 @@ let MongoService = {
     port : "",
     url : "http://"+this.ip+"/"+this.port+"/"+this.name+"/"+this.version+"/"
 }
-var MongoServiceURL = "";
 // periodically find service 
 setInterval(() => {
     axios
@@ -31,7 +30,7 @@ module.exports= {
     get: async owner => {
         var carrito ;
         axios
-            .get(MongoService.url+"carritos/"+owner)
+            .get(MongoService.url+"mongo/toString/"+owner)
             .then(response=>{
                carrito = response.carrito; 
             })
@@ -42,8 +41,14 @@ module.exports= {
     },
     add: async (owner, product, quantity)=> {
         var carrito ;
+        carrito = {
+            owner : owner,
+            product : product,
+            quantity : quantity
+        }
         axios
-            .put(MongoService.url +"carritos/addProduct/"+owner+"/"+product+"/"+quantity)
+            //.put(MongoService.url +"carritos/addProduct"+owner+"/"+product+"/"+quantity)
+            .put(MongoService.url+"mongo/addProduct", carrito)
             .then(response => {
                 carrito = response.carrito;
             })
@@ -54,8 +59,13 @@ module.exports= {
     },
     remove: async (owner, product, quantity) => {
         var carrito ;
+        carrito = {
+            owner : owner,
+            product : product,
+            quantity : quantity
+        }
         axios
-            .put(MongoService.url +"carritos/removeProduct/"+owner+"/"+product+"/"+quantity)
+            .put(MongoService.url +"mongo/removeProduct", carrito)
             .then(response => {
                 carrito = response.carrito;
             })

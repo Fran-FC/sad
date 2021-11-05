@@ -5,6 +5,8 @@ const app = express();
 
 const routes = require('./frameworks/express/routes')
 
+// http://localhost:3002/MongoClientAPI/v0/mongoCarritos/removeProduct 
+// {owner, product, quantity}
 const PORT = process.env.PORT || 3002; 
 const API_PREFIX = process.env.API_PREFIX || '/MongoClientAPI/v0';
 
@@ -40,6 +42,6 @@ module.exports ={
                 .catch(error=>{
                     console.error("ERROR updating in ServiceRegistry-> " + error);
                 });
-        }, 10000);
+        }, 20000);
     }   
 } 

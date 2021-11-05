@@ -16,16 +16,17 @@ module.exports = dependencies =>{
             console.log(JSON.parse(req.body));
             console.log(req.body.name);
 
-
             const{
                 owner,
-                products
+                product, 
+                quantity
             } = body;
 
             const addProduct = addProductUseCase(dependencies);
             const response = await addProduct.execute({
                 owner,
-                products
+                product,
+                quantity
             });
             console.log(response);
             

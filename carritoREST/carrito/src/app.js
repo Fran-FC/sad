@@ -41,6 +41,6 @@ module.exports ={
                 .catch(error=>{
                     console.error("ERROR updating in ServiceRegistry-> " + error);
                 });
-        }, 10000);
+        }, 20000);
     }   
 } 

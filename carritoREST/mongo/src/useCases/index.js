@@ -1,4 +1,4 @@
-const user = require('./users');
+const mongo = require('./mongo');
 module.exports = {
-    user
+    mongo
 } 

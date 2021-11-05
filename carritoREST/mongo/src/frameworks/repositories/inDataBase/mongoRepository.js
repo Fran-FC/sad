@@ -1,5 +1,5 @@
 const {
-    inMemory: inMemoryDb
+    inDataBase
 } = require('../../database');
 
 const{
@@ -26,7 +26,7 @@ module.exports= {
         return null;
 
     },
-    update: user =>{
+    get: owner =>{
         const index = inMemoryDb.users.findIndex(item => item.id === user.id);
         if (index>=0){
             inMemoryDb.users[index] = user;

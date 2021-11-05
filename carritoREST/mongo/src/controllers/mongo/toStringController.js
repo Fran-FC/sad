@@ -5,15 +5,15 @@ const{
 module.exports = dependencies =>{
     const{
         useCases:{
-            user:{  
-                listUsersUseCase
+            mongo:{  
+                toStringUseCase
             } 
         } 
     }  = dependencies;
-    const listUsers = async (req,res,next) =>{
+    const toString = async (req,res,next) =>{
         try{
-            const listUsers = listUsersUseCase(dependencies);
-            const response = await listUsers.execute();
+            const toString = toStringUseCase(dependencies);
+            const response = await toString.execute();
             
             res.json(new Response({
                 status:true,
@@ -27,6 +27,6 @@ module.exports = dependencies =>{
         } 
 
     } 
-    return listUsers;
+    return toString;
 
 } 

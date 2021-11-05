@@ -8,11 +8,8 @@ module.exports = dependencies => {
     }
     
     const execute = ({owner, product, quantity}) => {
-        var carrito = carritoRepository.get(owner);
-        if (!carrito) {
-            carrito = new Carrito(owner);
-        }
-        return carrito.addProduct(product, quantity);
+        var carrito = carritoRepository.add(owner, product, quantity);
+        return carrito;
     }
     
     return {execute};
