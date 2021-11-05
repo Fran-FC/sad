@@ -18,7 +18,7 @@ Para ofrecer siempre servicios "vivos", cada servicio tendrá un timeout de 10 s
 
 ## Puesta en marcha
 
-Para poner en marcha la aplicación tenemos que ejecutar en node el módulo index.js en Node. el módulo index se encarga de inicializar la aplicación que a su vez proviene del módulo src/app.js. 
+Para poner en marcha la aplicación tenemos que ejecutar el ServiceRegistry para poder registrar los servicios de la aplicación. Además, después iniciamos el módulo APICarro para instanciar el servicio y obtener la conexión con MongoDB y ya responder al cliente REST. Más adelante,  hay que iniciar el script index.js en Node. el módulo index se encarga de inicializar la aplicación que hará las llamadas al servicio que a su vez proviene del módulo src/app.js. 
 
 El módulo app es el que crea la arquitectura de la aplicación. Para crear la arquitectura sigue los siguientes pasos:
     1. Se utiliza la función json de Express para indicar que se puedan parsear payloads en formato JSON.
