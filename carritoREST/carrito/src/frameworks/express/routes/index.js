@@ -1,9 +1,9 @@
 const express = require('express');
-const userRoutes = require('./users')
+const carritoRoutes = require('./carritos')
 
 module.exports = dependencies =>{
     const routes = express.Router();
-    const users = userRoutes(dependencies);
-    routes.use('/users',users)
+    const carritos = carritoRoutes(dependencies);
+    routes.use('/carritos',carritos)
     return routes;
 }

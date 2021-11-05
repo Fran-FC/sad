@@ -6,7 +6,7 @@ const app = express();
 const routes = require('./frameworks/express/routes')
 
 const PORT = process.env.PORT || 3002; 
-const API_PREFIX = process.env.API_PREFIX || '/MongoClientAPI/v1';
+const API_PREFIX = process.env.API_PREFIX || '/MongoClientAPI/v0';
 
 const dependencies = require('./config/dependencies');
 

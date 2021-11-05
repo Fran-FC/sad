@@ -4,12 +4,12 @@ const{
 module.exports = dependencies =>{
     const{
         useCases:{
-            user:{  
-                addUserUseCase
+            carrito:{  
+                removeProductUseCase
             } 
         } 
     }  = dependencies;
-    const addUser = async (req,res,next) =>{
+    const removeProduct = async (req,res,next) =>{
         try{
             const body =  JSON.parse(req.body);
 
@@ -18,20 +18,14 @@ module.exports = dependencies =>{
 
 
             const{
-                id,
-                name,
-                lastName,
-                gender,
-                meta
+                owner,
+                products
             } = body;
 
-            const addUser = addUserUseCase(dependencies);
-            const response = await addUser.execute({
-                id,
-                name,
-                lastName, 
-                gender,
-                meta
+            const removeProduct = removeProductUseCase(dependencies);
+            const response = await removeProduct.execute({
+                owner,
+                products
             });
             console.log(response);
             
@@ -49,6 +43,6 @@ module.exports = dependencies =>{
         } 
 
     } 
-    return addUser;
+    return removeProduct;
 
 } 

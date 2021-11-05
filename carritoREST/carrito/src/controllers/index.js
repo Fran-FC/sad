@@ -1,4 +1,4 @@
-const userControllers = require('./user');
+const carritoControllers = require('./carrito');
 module.exports ={
-    userControllers
+    carritoControllers
 } 

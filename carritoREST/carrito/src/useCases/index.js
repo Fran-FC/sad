@@ -1,4 +1,4 @@
-const user = require('./users');
+const carritos = require('./carritos');
 module.exports = {
-    user
+    carritos
 } 

@@ -1,8 +1,5 @@
-const{User, UserConstants}  = require('./User');
+const{Carrito}  = require('./Carrito');
 
 module.exports ={
-    User, 
-    constants:{ 
-        UserConstants 
-    } 
+    Carrito
 }  

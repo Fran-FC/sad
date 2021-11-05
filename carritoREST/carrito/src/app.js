@@ -1,14 +1,18 @@
 const express = require('express');
+const axios = require('axios');
+
 const app = express();
 
 const routes = require('./frameworks/express/routes')
 
-const PORT = process.env.PORT || 3000; 
-const API_PREFIX = process.env.API_PREFIX || '/api/v1';
+const PORT = process.env.PORT || 3001; 
+const API_PREFIX = process.env.API_PREFIX || '/CarritoAPI/v0';
 
 const dependencies = require('./config/dependencies');
 
 const ErrorHandler = require('./frameworks/express/ErrorHandler');
+
+const ServiceRegistryURL = "http://localhost:3000"
 module.exports ={
     start: () =>{
         //Middlewares
@@ -27,5 +31,16 @@ module.exports ={
         } )
 
 
+        // update 
+        setInterval(()=>{
+            axios.
+                put(ServiceRegistryURL + "/register" + API_PREFIX + "/" + PORT). // register into ServiceRegistry with api name, version and port
+                then(response=>{
+                    console.log("updated service in ServiceRegistry-> " + response);
+                })
+                .catch(error=>{
+                    console.error("ERROR updating in ServiceRegistry-> " + error);
+                });
+        }, 10000);
     }   
 } 
