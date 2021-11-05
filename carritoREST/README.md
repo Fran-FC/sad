@@ -16,3 +16,14 @@ La implementación de este Service Registry que se nos proporciona es algo limit
 
 Para ofrecer siempre servicios "vivos", cada servicio tendrá un timeout de 10 segundos por defecto, una vez pasado el timeout, se eliminará el servicio. Esto va a requerir que cada componente registre su servicio cada 10 segundos (por lo menos) si quiere ser accesible en todo momento. Por otro lado, si un cliente quiere acceder a un servicio y obtiene una respuesta 404 puede volver a intentarlo en un tiempo o cancelar la opercación.
 
+## Puesta en marcha
+
+Para poner en marcha la aplicación tenemos que ejecutar en node el módulo index.js en Node. el módulo index se encarga de inicializar la aplicación que a su vez proviene del módulo src/app.js. 
+
+El módulo app es el que crea la arquitectura de la aplicación. Para crear la arquitectura sigue los siguientes pasos:
+    1. Se utiliza la función json de Express para indicar que se puedan parsear payloads en formato JSON.
+    2. Utilizamos la función urlencoded para parsear peticiones con formato urlencoded.
+    3. Usamos express.text para parsear peticiones que vengane en formato string.
+    4. Inicializamos la lógica de enrutamiento con app.use(API_PREFIX, routes(dependencies)), que obtiene todas las rutas de los servicios que ofrece la aplicación.
+    5. Le asociamos un manejador de errores con app.use(ErrorHandler).
+    6. Con toda la configuración hecha ponemos la aplicación a escuchar el puerto que tendremos definido en la constante PORT y mostraremos en la consola que efectivamente el servidor está en marcha.
