@@ -1,6 +1,13 @@
 # SAD (Servicios y Aplicaciones Distribuidas)
 # MEMORIA 2
 
+## Integrantes
+
+- Francesc Folch Company
+- Miguel Ángel Gabaldón Ibañez
+- Alejandro Manuel Albert Casañ
+
+
 En esta actividad debemos utilizar websockets para implementar un chat. Nos basaremos en el código proporcionado para implementar las siguientes funcionalidades:
 
 1. Enviar un mensaje a todos los usuarios conectados cuando alguien se
