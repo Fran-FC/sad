@@ -1,6 +1,10 @@
 # EJERCICIO CARRITO
 
+### Integrantes
 
+Francesc Folch Company
+Miguel Angel Gabaldon 
+Alejandro Albert Casañ
 
 ### Lista de scripts
 
