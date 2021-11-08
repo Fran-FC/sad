@@ -2,9 +2,9 @@
 
 ### Integrantes
 
-Francesc Folch Company
-Miguel Angel Gabaldon 
-Alejandro Albert Casañ
+- Francesc Folch Company
+- Miguel Ángel Gabaldón Ibáñez
+- Alejandro Albert Casañ
 
 ### Lista de scripts
 
