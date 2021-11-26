@@ -30,7 +30,7 @@ const updateToServiceRegistry = ()=>{
             then(response=>{
                 //console.log("updated service in ServiceRegistry-> " + response);
             })
-            .catch(error=>{
+            .catch(error=>{ 
                 console.error("ERROR updating in ServiceRegistry-> " + error);
             });
     }, 20000);
